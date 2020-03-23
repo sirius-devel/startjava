@@ -14,11 +14,10 @@ public class Calculator {
             result = (float)arg1 / arg2;
         } else if (operation == '^') {
             result = 1;
-            for(int i = 1; i <=4; i++) {
+            for(int i = 1; i <= arg2; i++) {
                 result *= arg1;
             }
-        }
-        else if(operation == '%') {
+        } else if (operation == '%') {
             result = arg1 % arg2;
         }
         System.out.println("" + arg1 + " " + operation + " " + arg2 + " = " + result);
