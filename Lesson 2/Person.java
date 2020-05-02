@@ -2,7 +2,7 @@ public class Person {
 
 	char gender = 'M';
 	String firstName = "Alexandr";
-	String surName = "Petrov";
+	String surname = "Petrov";
 	float height = 190f;
 	float weight = 85.5f;
 	int age = 31;
