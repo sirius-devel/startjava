@@ -1,8 +1,8 @@
 import java.util.Random;
-import java.lang.Math; 
+import java.lang.Math;
 
 public class Player {
-	private int  number;
+	private int number;
 	private String name;
 
 	public Player(String name) {
@@ -22,10 +22,10 @@ public class Player {
 	}
 
 	public void setNumber(int number) {
-		if (number>0 && number<=100) {
+		if (number > 0 && number <= 100) {
 			this.number = number;
 		} else {
-			this.number = Math.abs(number)%100;
+			this.number = Math.abs(number) % 100;
 			if (this.number == 0) {
 				this.number = 1;
 			}

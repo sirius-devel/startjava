@@ -51,7 +51,7 @@ public class Calculator {
                 result = num1 % num2;
                 break;
             default:
-                break;
+                System.out.println("Введена неподдерживаемая калькулятором операция");
         }
         System.out.println("Результат " + num1 + " " + operation + " " + num2 + " = " + result);
         return result;
