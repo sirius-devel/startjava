@@ -23,12 +23,26 @@ public class Calculator {
         return operation;
     }
 
-    public void setOperation(char operation) {
-        this.operation = operation;
+    public boolean setOperation(String operationString) {
+        boolean result = false;
+
+        if (operationString.length() != 1) {
+            System.out.println("Вы ввели целую строку вместо символа математической операции.");
+            result = false;
+        } else if ((operationString.charAt(0) != '+') && (operationString.charAt(0) != '-') &&
+            (operationString.charAt(0) != '*') && (operationString.charAt(0) != '/') &&
+            (operationString.charAt(0) != '%')) {
+            System.out.println("Введённый символ не является символом математической операции.");
+            result = false;
+        } else {
+            this.operation = operationString.charAt(0);
+            result = true;
+        }
+        return result;
     }
 
     public float calculate() {
-        float result = -1;
+        float result = 0;
         switch (operation) {
             case '+':
                 result = num1 + num2;
@@ -53,7 +67,6 @@ public class Calculator {
             default:
                 System.out.println("Введена неподдерживаемая калькулятором операция");
         }
-        System.out.println("Результат " + num1 + " " + operation + " " + num2 + " = " + result);
         return result;
     }
 }

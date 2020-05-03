@@ -5,46 +5,29 @@ public class CalculatorTest {
 
 	public static void main(String[] args) {
 		Calculator calculator = new Calculator();
-		input(calculator);
-		calculator.calculate();
-		boolean stillContinue = true;
-		while(stillContinue) {
-			while(true) {
-				System.out.println("Хотите продолжить? [да/нет]: ");
-				String answer = scan.next();
-				if (answer.equals("да")) {
-					input(calculator);
-					calculator.calculate();
-					stillContinue = true;
-					break;
-				} else if (answer.equals("нет")) {
-					stillContinue = false;
-					break;
-				} else {
+		String answer = "";
+
+		do {
+			input(calculator);
+			System.out.println("Результат " + calculator.getNum1() + " " + calculator.getOperation() +
+				" " + calculator.getNum2() + " = " + calculator.calculate());
+			answer = "";
+			while(!(answer.equals("да") || answer.equals("нет"))) {
+				System.out.println("Хотите продолжить игру? [да/нет]: ");
+				answer = scan.next();
+				if (!(answer.equals("да") || answer.equals("нет"))) {
 					System.out.print("Ваш ответ непонятен, ответьте ещё раз. ");
 				}
 			}
-		}
+		} while(!answer.equals("нет"));
 	}
 
 	private static void input(Calculator calculator) {
 		System.out.print("Введите первое целое число: ");
 		calculator.setNum1(scan.nextInt());
-		boolean isOperationEnter = false;
-		while(!isOperationEnter) {
+		do {
 			System.out.print("Введите знак операции: ");
-			String operationString = scan.next();
-			if (operationString.length() != 1) {
-				System.out.println("Вы ввели целую строку вместо символа математической операции.");
-			} else if ((operationString.charAt(0) != '+') && (operationString.charAt(0) != '-') &&
-				(operationString.charAt(0) != '*') && (operationString.charAt(0) != '/') &&
-				(operationString.charAt(0) != '%')) {
-				System.out.println("Введённый символ не является символом математической операции.");
-			} else {
-				calculator.setOperation(operationString.charAt(0));
-				isOperationEnter = true;
-			}
-		}
+		} while (!calculator.setOperation(scan.next()));
 		System.out.print("Введите второе целое число: ");
 		calculator.setNum2(scan.nextInt());
 	}
