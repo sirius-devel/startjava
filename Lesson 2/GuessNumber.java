@@ -3,12 +3,10 @@ import java.util.Scanner;
 
 public class GuessNumber {
 	private int guessNumber;
-	private Scanner scan;
 	private Player player1;
 	private Player player2;
 
 	public GuessNumber(Player player1, Player player2) {
-		scan = new Scanner(System.in);
 		this.player1 = player1;
 		this.player2 = player2;
 	}
@@ -19,15 +17,15 @@ public class GuessNumber {
 		System.out.println("Компьютер загадал число.");
 		do {
 			inputNumber(player1);
-			if (!compareNumber(player1)) {
-				inputNumber(player2);
-			} else {
+			if (compareNumber(player1)) {
 				break;
 			}
+			inputNumber(player2);
 		} while(!compareNumber(player2));
 	}
 
 	private void inputNumber(Player player) {
+		Scanner scan = new Scanner(System.in);
 		System.out.print(player.getName() + ", введите загаданное число: ");
 		player.setNumber(scan.nextInt());
 	}

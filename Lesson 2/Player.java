@@ -25,10 +25,8 @@ public class Player {
 		if (number > 0 && number <= 100) {
 			this.number = number;
 		} else {
-			this.number = Math.abs(number) % 100;
-			if (this.number == 0) {
-				this.number = 1;
-			}
+			int rnd = Math.abs(number) % 100;
+			this.number = rnd == 0 ? 1 : rnd;
 			System.out.println("В игре используются числа из диапазона (0;100], поэтому мы исправили ваш ввод на " + this.number);
 		}
 	}

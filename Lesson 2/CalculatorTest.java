@@ -9,8 +9,8 @@ public class CalculatorTest {
 
 		do {
 			input(calculator);
-			System.out.println("Результат " + calculator.getNum1() + " " + calculator.getOperation() +
-				" " + calculator.getNum2() + " = " + calculator.calculate());
+			System.out.println("Результат " + calculator.getNum(1) + " " + calculator.getOperation() +
+				" " + calculator.getNum(2) + " = " + calculator.calculate());
 			answer = "";
 			while(!(answer.equals("да") || answer.equals("нет"))) {
 				System.out.println("Хотите продолжить игру? [да/нет]: ");
@@ -23,13 +23,20 @@ public class CalculatorTest {
 	}
 
 	private static void input(Calculator calculator) {
-		System.out.print("Введите первое целое число: ");
-		calculator.setNum1(scan.nextInt());
+		inputNumber(1, calculator);
+		inputOperation(calculator);
+		inputNumber(2, calculator);
+	}
+
+	private static void inputNumber(int i, Calculator calculator) {
+		System.out.print("Введите целое число " + i + ": ");
+		calculator.setNum(i, scan.nextInt());
+	}
+
+	private static void inputOperation(Calculator calculator) {
 		do {
 			System.out.print("Введите знак операции: ");
 		} while (!calculator.setOperation(scan.next()));
-		System.out.print("Введите второе целое число: ");
-		calculator.setNum2(scan.nextInt());
 	}
 }
 
