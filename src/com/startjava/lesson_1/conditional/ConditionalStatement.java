@@ -1,3 +1,5 @@
+package com.startjava.lesson_1.conditional;
+
 public class ConditionalStatement {	
     public static void main(String[] args) {
     	byte age = 25;
@@ -9,6 +11,7 @@ public class ConditionalStatement {
     	if (isMale) {
     		System.out.println("Мужчина.");
     	}
+        
     	if (!isMale) {
     		System.out.println("Женщина.");
     	}
