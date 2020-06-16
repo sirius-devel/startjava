@@ -1,4 +1,4 @@
-package com.startjava.lesson_2_3.game;
+package com.startjava.lesson_2_3_4.game;
 
 import java.util.Scanner;
 
@@ -16,14 +16,13 @@ public class GuessNumberTest {
 
 		do {
 			guessNumber.play();
-			answer = "";
-			while(!(answer.equals("да") || answer.equals("нет"))) {
+			do {
 				System.out.println("Хотите продолжить игру? [да/нет]: ");
 				answer = scan.next();
 				if (!(answer.equals("да") || answer.equals("нет"))) {
 					System.out.print("Ваш ответ непонятен, ответьте ещё раз. ");
 				}
-			}
+			} while(!(answer.equals("да") || answer.equals("нет")));
 		} while(!answer.equals("нет"));
 	}
 }
