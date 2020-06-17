@@ -19,21 +19,31 @@ public class GuessNumber {
 	}
 
 	public void play() {
+		int gameoverPlayerCount = 0;
+
 		guessNumber = (new Random()).nextInt(100) + 1;
+		winnerIndex = -1;
 		System.out.println("Компьютер загадал число. У вас " + maxAttemptCount + " попыток угадать.");
-		boolean hasWinner = false;
-		do {
-			if (players[0].getAttemptCount() < maxAttemptCount) {
-				inputNumber(0);
-				if (compareNumber(0)) {
-					break;
+		while (winnerIndex == - 1 && gameoverPlayerCount != players.length) {
+			for (int i = 0; i < players.length; i++) {
+				if (players[i].getAttemptCount() < maxAttemptCount) {
+					inputNumber(i);
+					if (compareNumber(i)) {
+						break;
+					}
+				} else {
+					gameoverPlayerCount++;
 				}
 			}
-			inputNumber(1);
-		} while(!compareNumber(1) && (players[1].getAttemptCount() < maxAttemptCount));
+		}
 		if (winnerIndex != -1)
 			System.out.println("Игрок " + players[winnerIndex].getName() + " угадал число " + guessNumber + " с " +
 					players[winnerIndex].getAttemptCount() + " попытки.");
+		printAttempts();
+		clearAttempts();
+	}
+
+	private void printAttempts() {
 		for(Player player : players) {
 			int[] realAttempts = Arrays.copyOf(player.getAttempts(), player.getAttemptCount());
 			for(int attempt : realAttempts) {
@@ -41,6 +51,9 @@ public class GuessNumber {
 			}
 			System.out.print("\n");
 		}
+	}
+
+	private  void clearAttempts() {
 		for(Player player : players) {
 			player.clear();
 		}
@@ -48,25 +61,27 @@ public class GuessNumber {
 
 	private void inputNumber(int playerIndex) {
 		Scanner scan = new Scanner(System.in);
-		System.out.print(players[playerIndex].getName() + ", введите загаданное число: ");
-		players[playerIndex].setAttempt(scan.nextInt());
+		Player player = players[playerIndex];
+
+		System.out.print(player.getName() + ", введите загаданное число: ");
+		player.setAttempt(scan.nextInt());
 	}
 
 	private boolean compareNumber(int playerIndex) {
-		int attemptNumber = players[playerIndex].getAttempt( players[playerIndex].getAttemptCount()-1);
-		winnerIndex = -1;
+		Player player = players[playerIndex];
+		int attemptNumber = player.getAttempt( players[playerIndex].getAttemptCount()-1);
 
+		winnerIndex = -1;
 		if (attemptNumber < guessNumber) {
 			System.out.println("Введённое вами число меньше того, что загадал компьютер");
-		}
-		else if (attemptNumber > guessNumber) {
+		} else if (attemptNumber > guessNumber) {
 			System.out.println("Введённое вами число больше того, что загадал компьютер");
 		} else {
 			System.out.println("Вы угадали и победили!");
 			winnerIndex = playerIndex;
 		}
-		if (players[playerIndex].getAttemptCount() == maxAttemptCount && winnerIndex == -1)
-			System.out.println("У игрока " + players[playerIndex].getName() + " закончились попытки.");
+		if (player.getAttemptCount() == maxAttemptCount && winnerIndex == -1)
+			System.out.println("У игрока " + player.getName() + " закончились попытки.");
 		return (winnerIndex != -1);
 	}
 }
