@@ -30,9 +30,8 @@ public class Player {
 		this.name = name;
 	}
 
-	public int getAttempt(int pos) {
-		pos = Math.abs(pos) % attempts.length;
-		return attempts[pos];
+	public int getLastAttempt() {
+		return attempts[attemptCount - 1];
 	}
 
 	public void setAttempt(int number) {

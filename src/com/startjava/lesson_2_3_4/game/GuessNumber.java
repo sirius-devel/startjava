@@ -36,9 +36,10 @@ public class GuessNumber {
 				}
 			}
 		}
-		if (winnerIndex != -1)
+		if (winnerIndex != -1) {
 			System.out.println("Игрок " + players[winnerIndex].getName() + " угадал число " + guessNumber + " с " +
 					players[winnerIndex].getAttemptCount() + " попытки.");
+		}
 		printAttempts();
 		clearAttempts();
 	}
@@ -53,7 +54,7 @@ public class GuessNumber {
 		}
 	}
 
-	private  void clearAttempts() {
+	private void clearAttempts() {
 		for(Player player : players) {
 			player.clear();
 		}
@@ -69,7 +70,7 @@ public class GuessNumber {
 
 	private boolean compareNumber(int playerIndex) {
 		Player player = players[playerIndex];
-		int attemptNumber = player.getAttempt( players[playerIndex].getAttemptCount()-1);
+		int attemptNumber = player.getLastAttempt();
 
 		winnerIndex = -1;
 		if (attemptNumber < guessNumber) {
@@ -80,8 +81,9 @@ public class GuessNumber {
 			System.out.println("Вы угадали и победили!");
 			winnerIndex = playerIndex;
 		}
-		if (player.getAttemptCount() == maxAttemptCount && winnerIndex == -1)
+		if (player.getAttemptCount() == maxAttemptCount && winnerIndex == -1) {
 			System.out.println("У игрока " + player.getName() + " закончились попытки.");
-		return (winnerIndex != -1);
+		}
+		return winnerIndex != -1;
 	}
 }
